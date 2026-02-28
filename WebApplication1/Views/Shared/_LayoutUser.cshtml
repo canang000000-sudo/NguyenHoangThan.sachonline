@@ -16,8 +16,17 @@
                 cursor: pointer;
             }
 
+        .media-left {
+            padding-right: 15px;
+            flex-shrink: 0; /* This prevents the image container from shrinking to 0 */
+            width: 115px; /* Image width (100px) + padding (15px) */
+        }
+
         .imgsachbannhieu {
             width: 100px;
+            height: 150px;
+            object-fit: cover;
+            display: block; /* Images are inline by default, block is safer for layout */
         }
     </style>
 </head>
@@ -55,7 +64,7 @@
     </div>
     <!-- /.container-->
     <div class="container">
-        @RenderSection("SachBanNhieu", required: false)
+        @Html.Action("SachBanNhieuPartial", "SachOnline")
     </div>
     <!-- /.container-->
     @Html.Action("FooterPartial", "SachOnline")

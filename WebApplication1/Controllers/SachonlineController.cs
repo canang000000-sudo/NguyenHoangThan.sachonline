@@ -16,6 +16,13 @@ namespace TranPhamThanhTrung.SachOnline.Controllers
         {
             return data.SACHes.OrderByDescending(a => a.NgayCapNhat).Take(count).ToList();
         }
+
+        private List<SACH> LaySachBanNhieu(int count)
+        {
+            // Sort by SoLuongBan (Sold Number) descending and take the top 6
+            return data.SACHes.OrderByDescending(s => s.SoLuongBan).Take(count).ToList();
+        }
+
         public ActionResult ChuDePartial()
         {
             var listChuDe = from cd in data.CHUDEs select cd;
@@ -41,12 +48,14 @@ namespace TranPhamThanhTrung.SachOnline.Controllers
 
         public ActionResult NhaXuatBanPartial()
         {
-            return PartialView();
+            var listNhaXuatBan = from nxb in data.NHAXUATBANs select nxb;
+            return PartialView(listNhaXuatBan);
         }
 
         public ActionResult SachBanNhieuPartial()
         {
-            return PartialView();
+            var sachBanNhieu = LaySachBanNhieu(6);
+            return PartialView(sachBanNhieu);
         }
 
         public ActionResult FooterPartial()
